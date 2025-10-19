@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Clean Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Customizing Tailwind to use a professional, modern color scheme
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        // NEW Palette: Earthy Slate & Vibrant Copper
+                        'primary': '#334155',      // Dark Slate for text and background headers
+                        'secondary': '#f8fafc',    // Very light background for sections
+                        'accent': '#b45309',       // Deep Copper/Orange for highlight/buttons (Unique color)
+                        'accent-light': '#f97316', // Brighter Orange for hover states
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: 0, transform: 'translateY(10px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom CSS for smooth scroll on all browsers and better aesthetics */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Styling for the floating image/avatar */
+        .avatar-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Ensures section links work correctly even with fixed header */
+        .section-padding {
+            padding-top: 5rem; /* Space for the fixed header */
+            padding-bottom: 5rem;
+        }
+        
+        /* Custom hover effect on project cards */
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-overlay {
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+            transform: translateY(10px);
+        }
+
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #94a3b8; /* Tailwind slate-400 */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; /* Tailwind secondary */
+        }
+    </style>
+</head>
+
+<body class="bg-secondary text-primary">
+
+    <!-- 1. Fixed Navigation Bar (Header) -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-lg z-50 transition-shadow duration-300">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
+            <!-- Logo/Name -->
+            <a href="#hero" class="text-2xl font-bold text-primary hover:text-accent transition-colors">
+                [Your Name]
+            </a>
+            
+            <!-- Desktop Navigation Links -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link font-medium text-gray-700 hover:text-accent transition-colors duration-200">About</a>
+                <a href="#skills" class="nav-link font-medium text-gray-700 hover:text-accent transition-colors duration-200">Skills</a>
+                <a href="#projects" class="nav-link font-medium text-gray-700 hover:text-accent transition-colors duration-200">Projects</a>
+                <a href="#contact" class="nav-link font-medium text-gray-700 hover:text-accent transition-colors duration-200">Contact</a>
+            </div>
+
+            <!-- Resume Button -->
+            <a href="#contact" class="hidden md:block bg-accent text-white px-4 py-2 rounded-lg font-semibold hover:bg-accent-light transition-colors duration-300 shadow-md">
+                Resume (PDF Link)
+            </a>
+            
+            <!-- Mobile Menu Button (Simple Icon) -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-primary hover:text-accent rounded-md transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner pb-4">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#about" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">About</a>
+                <a href="#skills" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Skills</a>
+                <a href="#projects" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Projects</a>
+                <a href="#contact" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Contact</a>
+                <a href="#contact" class="block w-full text-center bg-accent text-white px-4 py-2 mt-2 rounded-lg font-semibold hover:bg-accent-light transition-colors">
+                    Resume (PDF Link)
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20"> <!-- Ensure content starts below fixed header -->
+
+        <!-- 2. Hero / About Section -->
+        <section id="hero" class="section-padding bg-white min-h-[80vh] flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Text Content -->
+                <div class="animate-fade-in" style="animation-delay: 0.1s;">
+                    <p class="text-xl text-accent-light font-semibold mb-2">Hello, I'm</p>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-primary mb-4">
+                        Krunal Kaware
+                    </h1>
+                    <h2 class="text-3xl text-gray-600 font-light mb-6">
+                        A Passionate <span class="font-semibold text-accent">Full Stack Developer</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 max-w-lg">
+                        I specialize in crafting clean, high-performance web applications using modern frameworks like React, Angular, and Node.js. Let's build something amazing together.
+                    </p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="#projects" class="inline-flex items-center bg-accent text-white px-6 py-3 rounded-xl text-lg font-semibold hover:bg-accent-light transition-all duration-300 shadow-lg hover:shadow-xl">
+                            View Projects
+                        </a>
+                        <a href="#contact" class="inline-flex items-center border border-gray-300 text-primary px-6 py-3 rounded-xl text-lg font-semibold hover:bg-gray-200 transition-all duration-300">
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Avatar/Image Placeholder -->
+                <div class="hidden lg:flex justify-center animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="w-64 h-64 bg-gray-300 rounded-full shadow-2xl flex items-center justify-center text-gray-500 text-3xl font-bold border-8 border-white avatar-float">
+                        Avatar
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Skills Section -->
+        <section id="skills" class="section-padding bg-secondary">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-extrabold text-primary mb-12 text-center">My Core Skills</h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <!-- Skill Pill Components -->
+                    <div class="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 hover:scale-[1.03] transform border border-gray-100">
+                        <span class="text-4xl mb-2 block">💻</span>
+                        <p class="font-semibold text-primary">JavaScript</p>
+                        <p class="text-sm text-gray-500">Node, ES6+</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 hover:scale-[1.03] transform border border-gray-100">
+                        <span class="text-4xl mb-2 block">⚛️</span>
+                        <p class="font-semibold text-primary">React</p>
+                        <p class="text-sm text-gray-500">Hooks, Context</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 hover:scale-[1.03] transform border border-gray-100">
+                        <span class="text-4xl mb-2 block">🅰️</span>
+                        <p class="font-semibold text-primary">Angular</p>
+                        <p class="text-sm text-gray-500">Signals, RxJS</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 hover:scale-[1.03] transform border border-gray-100">
+                        <span class="text-4xl mb-2 block">🐘</span>
+                        <p class="font-semibold text-primary">PostgreSQL</p>
+                        <p class="text-sm text-gray-500">SQL, ORMs</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 hover:scale-[1.03] transform border border-gray-100">
+                        <span class="text-4xl mb-2 block">🎨</span>
+                        <p class="font-semibold text-primary">Tailwind CSS</p>
+                        <p class="text-sm text-gray-500">Responsive Design</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 hover:scale-[1.03] transform border border-gray-100">
+                        <span class="text-4xl mb-2 block">☁️</span>
+                        <p class="font-semibold text-primary">Cloud (GCP)</p>
+                        <p class="text-sm text-gray-500">Firebase, Serverless</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Projects Section -->
+        <section id="projects" class="section-padding bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-extrabold text-primary mb-12 text-center">Featured Projects</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Project Card 1 -->
+                    <div class="project-card bg-secondary rounded-xl shadow-xl overflow-hidden transition-shadow duration-300 border border-gray-200">
+                        <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-500 font-bold">Project 1 Placeholder Image</div>
+                        <div class="p-6 relative">
+                            <h3 class="text-2xl font-bold text-primary mb-2">E-commerce Platform</h3>
+                            <p class="text-gray-600 mb-4">A full-stack application featuring user authentication, shopping cart logic, and Stripe integration.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-xs font-medium bg-gray-300 px-3 py-1 rounded-full">React</span>
+                                <span class="text-xs font-medium bg-gray-300 px-3 py-1 rounded-full">Node.js</span>
+                                <span class="text-xs font-medium bg-gray-300 px-3 py-1 rounded-full">MongoDB</span>
+                            </div>
+                            
+                            <!-- Hover Overlay -->
+                            <div class="project-overlay absolute inset-0 bg-accent bg-opacity-95 flex flex-col items-center justify-center p-6">
+                                <p class="text-white text-lg font-semibold mb-4 text-center">See Details</p>
+                                <a href="#" target="_blank" class="text-white border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-accent transition-all duration-300">
+                                    View Live
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 -->
+                    <div class="project-card bg-secondary rounded-xl shadow-xl overflow-hidden transition-shadow duration-300 border border-gray-200">
+                        <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-500 font-bold">Project 2 Placeholder Image</div>
+                        <div class="p-6 relative">
+                            <h3 class="text-2xl font-bold text-primary mb-2">Data Visualization Dashboard</h3>
+                            <p class="text-gray-600 mb-4">An interactive dashboard built to visualize complex real-time data using D3.js and Angular.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-xs font-medium bg-gray-300 px-3 py-1 rounded-full">Angular</span>
+                                <span class="text-xs font-medium bg-gray-300 px-3 py-1 rounded-full">D3.js</span>
+                                <span class="text-xs font-medium bg-gray-300 px-3 py-1 rounded-full">TypeScript</span>
+                            </div>
+                            
+                            <!-- Hover Overlay -->
+                            <div class="project-overlay absolute inset-0 bg-accent bg-opacity-95 flex flex-col items-center justify-center p-6">
+                                <p class="text-white text-lg font-semibold mb-4 text-center">See Details</p>
+                                <a href="#" target="_blank" class="text-white border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-accent transition-all duration-300">
+                                    View Live
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3 -->
+                    <div class="project-card bg-secondary rounded-xl shadow-xl overflow-hidden transition-shadow duration-300 border border-gray-200">
+                        <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-500 font-bold">Project 3 Placeholder Image</div>
+                        <div class="p-6 relative">
+                            <h3 class="text-2xl font-bold text-primary mb-2">Mobile-First Todo App</h3>
+                            <p class="text-gray-600 mb-4">A simple, highly responsive task management application utilizing Firebase for backend services.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-xs font-medium bg-gray-300 px-3 py-1 rounded-full">HTML/JS</span>
+                                <span class="text-xs font-medium bg-gray-300 px-3 py-1 rounded-full">Tailwind</span>
+                                <span class="text-xs font-medium bg-gray-300 px-3 py-1 rounded-full">Firebase</span>
+                            </div>
+                            
+                            <!-- Hover Overlay -->
+                            <div class="project-overlay absolute inset-0 bg-accent bg-opacity-95 flex flex-col items-center justify-center p-6">
+                                <p class="text-white text-lg font-semibold mb-4 text-center">See Details</p>
+                                <a href="#" target="_blank" class="text-white border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-accent transition-all duration-300">
+                                    View Live
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Contact Section -->
+        <section id="contact" class="section-padding bg-secondary">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-extrabold text-primary mb-4 text-center">Get In Touch</h2>
+                <p class="text-xl text-gray-600 mb-12 text-center max-w-2xl mx-auto">
+                    I'm currently available for freelance projects and new opportunities. Feel free to send a message!
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-10">
+                    
+                    <!-- Contact Info -->
+                    <div class="md:col-span-1 space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <!-- Emojis are used for simple, unique icons -->
+                            <span class="text-accent text-2xl">📧</span>
+                            <div>
+                                <h4 class="font-semibold text-primary">Email</h4>
+                                <p class="text-gray-600 hover:text-accent transition-colors">your.email@example.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <span class="text-accent text-2xl">📞</span>
+                            <div>
+                                <h4 class="font-semibold text-primary">Phone</h4>
+                                <p class="text-gray-600">(555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <span class="text-accent text-2xl">🔗</span>
+                            <div>
+                                <h4 class="font-semibold text-primary">Socials</h4>
+                                <p class="space-x-4 text-gray-600">
+                                    <a href="#" class="hover:text-accent transition-colors">LinkedIn</a>
+                                    <a href="#" class="hover:text-accent transition-colors">GitHub</a>
+                                    <a href="#" class="hover:text-accent transition-colors">Twitter</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form (Functional structure, action needs backend) -->
+                    <form action="#" method="POST" class="md:col-span-2 space-y-6 p-8 bg-white rounded-xl shadow-xl">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                            <input type="text" name="name" id="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent focus:border-accent transition-all">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" name="email" id="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent focus:border-accent transition-all">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea name="message" id="message" rows="4" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent focus:border-accent transition-all"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-accent text-white px-6 py-3 rounded-xl text-lg font-semibold hover:bg-accent-light transition-colors duration-300 shadow-md">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            &copy; 2024 [Your Name]. All Rights Reserved. Built with <span class="text-red-400">❤️</span> and Tailwind CSS.
+        </div>
+    </footer>
+
+
+    <script>
+        // --- JavaScript for Interactivity ---
+
+        // 1. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 2. Close mobile menu after clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                // Ensure the menu is only hidden if it's currently open (on mobile)
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // 3. Optional: Add a smooth scroll fallback/enhancement (using 'smooth' style above is often enough)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Prevent default hash link behavior if needed, but smooth scroll is handled by CSS
+                // e.preventDefault(); 
+            });
+        });
+        
+    </script>
+</body>
+</html>
